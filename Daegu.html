@@ -14,12 +14,11 @@
             margin: 0;
             background-color: #f4f4f9;
             position: relative;
-            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto; /* 커서 변경 */
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
         }
         .line2-text, .line3-text, .line4-text {
             cursor: pointer;
         }
-
 
         .rectangle1, .rectangle2, .rectangle3 {
             text-align: left;
@@ -114,28 +113,16 @@
         }
 
         .restaurant-section {
-            margin-bottom: 50px; /* 섹션 간의 간격 조정 */
+            margin-bottom: 50px;
         }
 
         .restaurant-section h2 {
-            margin: 0 0 10px 0; /* 여백 설정 */
+            margin: 0 0 10px 0;
             display: flex;
             align-items: center;
         }
 
-        .restaurant-logo {
-            width: 45px; /* 원하는 크기로 변경 */
-            height: auto;
-            margin-right: 10px; /* 이미지와 텍스트 간격 조정 */
-        }
-
-        .cafe_icon {
-            width: 45px;
-            height: auto;
-            margin-right: 10px;
-        }
-
-        .hotel_icon {
+        .restaurant-logo, .cafe_icon, .hotel_icon {
             width: 45px;
             height: auto;
             margin-right: 10px;
@@ -143,25 +130,25 @@
 
         .restaurant-images {
             display: flex;
-            justify-content: flex-start; /* 왼쪽 정렬 */
-            margin-bottom: 10px; /* 아래쪽 여백 추가 */
+            justify-content: flex-start;
+            margin-bottom: 10px;
         }
 
         .restaurant-image1, .restaurant-image2, .restaurant-image3 {
-            width: 150px; /* 원하는 크기로 변경 */
+            width: 150px;
             height: auto;
             margin-right: 10px;
         }
 
         .information {
             display: flex;
-            justify-content: space-between; /* 텍스트와 이미지를 양쪽으로 배치 */
-            align-items: flex-start; /* 수직 정렬 */
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
         .information-text {
             flex: 1;
-            padding-right: 10px; /* 텍스트와 이미지 사이 여백 */
+            padding-right: 10px;
         }
 
         .information-images {
@@ -175,14 +162,14 @@
 
         .review {
             display: inline-block;
-            padding: 5px 10px; /* 내부 여백 조정 */
-            font-size: 12px; /* 글씨 크기 조정 */
+            padding: 5px 10px;
+            font-size: 12px;
             border: 1px solid #000000;
             border-radius: 5px;
             background-color: white;
             cursor: pointer;
             box-sizing: border-box;
-            width: auto; /* 버튼 크기 자동 조정 */
+            width: auto;
         }
 
         .review-container {
@@ -199,7 +186,7 @@
 <body>
     <div class="rectangle1">
         <div class="logo">
-            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo" onclick="location.href='https://tmxla.github.io/team/MomIsAlien.html'">
             <span class="with-pet">With Pet</span>
         </div>
         <button class="back-button" onclick="goBack()">←</button>
@@ -226,7 +213,6 @@
             <div class="restaurant-item" onclick="scrollToSection('palgo')">3. 팔공힐링펜션</div>
         </div>
     </div>
-    <div class="line1"></div>
 
     <div class="rectangle3">
         <!-- 생수정 섹션 -->
@@ -363,7 +349,7 @@
                 </div>
                 <div class="information-images">
                     <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
-                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2">
                     <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
                 </div>
             </div>
