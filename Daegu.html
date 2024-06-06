@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Daegu</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto; /* 커서 변경 */
+        }
+        .line2-text, .line3-text, .line4-text {
+            cursor: pointer;
+        }
+
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px; /* 섹션 간의 간격 조정 */
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0; /* 여백 설정 */
+            display: flex;
+            align-items: center;
+        }
+
+        .restaurant-logo {
+            width: 45px; /* 원하는 크기로 변경 */
+            height: auto;
+            margin-right: 10px; /* 이미지와 텍스트 간격 조정 */
+        }
+
+        .cafe_icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .hotel_icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .restaurant-images {
+            display: flex;
+            justify-content: flex-start; /* 왼쪽 정렬 */
+            margin-bottom: 10px; /* 아래쪽 여백 추가 */
+        }
+
+        .restaurant-image1, .restaurant-image2, .restaurant-image3 {
+            width: 150px; /* 원하는 크기로 변경 */
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between; /* 텍스트와 이미지를 양쪽으로 배치 */
+            align-items: flex-start; /* 수직 정렬 */
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px; /* 텍스트와 이미지 사이 여백 */
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px; /* 내부 여백 조정 */
+            font-size: 12px; /* 글씨 크기 조정 */
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto; /* 버튼 크기 자동 조정 */
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">대구광역시</span>
+        <div class="line2-text" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('saengsujeong')">1. 생수정</div>
+            <div class="restaurant-item" onclick="scrollToSection('mansu-chicken')">2. 만수통닭 수성못본점</div>
+            <div class="restaurant-item" onclick="scrollToSection('dogbrothers')">3. 도그브라더스</div>
+        </div>
+        <div class="line3-text" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('frankfrank')">1. 프랭크프랭크</div>
+            <div class="restaurant-item" onclick="scrollToSection('years')">2. 이얼즈</div>
+            <div class="restaurant-item" onclick="scrollToSection('cafewoods')">3. 카페우즈</div>
+        </div>
+        <div class="line4-text" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('gostay')">1. 곳스테이</div>
+            <div class="restaurant-item" onclick="scrollToSection('staydangdang')">2. 스테이댕댕</div>
+            <div class="restaurant-item" onclick="scrollToSection('palgo')">3. 팔공힐링펜션</div>
+        </div>
+    </div>
+    <div class="line1"></div>
+
+    <div class="rectangle3">
+        <!-- 생수정 섹션 -->
+        <div class="restaurant-section" id="saengsujeong">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="restaurant-logo">
+                식당 With Pet - 생수정
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 생수정</div>
+                    <div class="point">★4.31</div>
+                    <div class="addr">대구 달성군 가창면 우록3길 58</div>
+                    <div class="time">10:00 ~ 21:00</div>
+                    <div class="tel">☎053-767-9006</div>
+                    <div class="menu">숯불구이 매운맛 - 48,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('saengsujeong-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="saengsujeong-reviews">
+                        <div>리뷰1. 맛있어요</div>
+                        <div>리뷰2. 재방문의사 100%예요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/tThHtCr3/image1.jpg" alt="image1" class="restaurant-image1">
+                    <img src="https://i.postimg.cc/NF4X8vh5/image2.png" alt="image2" class="restaurant-image2">
+                    <img src="https://i.postimg.cc/3RqVKVf0/image3.jpg" alt="image3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 만수통닭 섹션 -->
+        <div class="restaurant-section" id="mansu-chicken">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="restaurant-logo">
+                식당 With Pet - 만수통닭
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 만수통닭</div>
+                    <div class="point">★4.20</div>
+                    <div class="addr">대구 수성구 수성못길 30</div>
+                    <div class="time">10:00 ~ 22:00</div>
+                    <div class="tel">☎053-123-4567</div>
+                    <div class="menu">후라이드 치킨 - 15,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('mansu-chicken-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="mansu-chicken-reviews">
+                        <div>리뷰1. 정말 맛있어요</div>
+                        <div>리뷰2. 꼭 다시 올 거에요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 도그브라더스 섹션 -->
+        <div class="restaurant-section" id="dogbrothers">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="restaurant-logo">
+                식당 With Pet - 도그브라더스
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 도그브라더스</div>
+                    <div class="point">★4.50</div>
+                    <div class="addr">대구 남구 현충로 123</div>
+                    <div class="time">09:00 ~ 22:00</div>
+                    <div class="tel">☎053-987-6543</div>
+                    <div class="menu">특제 닭갈비 - 20,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('dogbrothers-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="dogbrothers-reviews">
+                        <div>리뷰1. 최고예요!</div>
+                        <div>리뷰2. 또 올게요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 프랭크프랭크 섹션 -->
+        <div class="restaurant-section" id="frankfrank">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="cafe_icon">
+                카페 With Pet - 프랭크프랭크
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 프랭크프랭크</div>
+                    <div class="point">★4.50</div>
+                    <div class="addr">대구 북구 칠성로 101</div>
+                    <div class="time">08:00 ~ 22:00</div>
+                    <div class="tel">☎053-234-5678</div>
+                    <div class="menu">아메리카노 - 4,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('frankfrank-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="frankfrank-reviews">
+                        <div>리뷰1. 분위기 좋아요</div>
+                        <div>리뷰2. 커피 맛있어요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 이얼즈 섹션 -->
+        <div class="restaurant-section" id="years">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="cafe_icon">
+                카페 With Pet - 이얼즈
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 이얼즈</div>
+                    <div class="point">★4.60</div>
+                    <div class="addr">대구 중구 중앙대로 101</div>
+                    <div class="time">09:00 ~ 21:00</div>
+                    <div class="tel">☎053-345-6789</div>
+                    <div class="menu">카페라떼 - 4,500원</div>
+                    <div class="review review-button" onclick="toggleReviews('years-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="years-reviews">
+                        <div>리뷰1. 조용하고 아늑해요</div>
+                        <div>리뷰2. 다시 오고 싶어요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 카페우즈 섹션 -->
+        <div class="restaurant-section" id="cafewoods">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="cafe_icon">
+                카페 With Pet - 카페우즈
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 카페우즈</div>
+                    <div class="point">★4.70</div>
+                    <div class="addr">대구 서구 원대로 101</div>
+                    <div class="time">07:00 ~ 23:00</div>
+                    <div class="tel">☎053-456-7890</div>
+                    <div class="menu">핸드드립 커피 - 5,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('cafewoods-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="cafewoods-reviews">
+                        <div>리뷰1. 커피 맛집이에요</div>
+                        <div>리뷰2. 추천해요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 곳스테이 섹션 -->
+        <div class="restaurant-section" id="gostay">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="hotel_icon">
+                숙소 With Pet - 곳스테이
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 곳스테이</div>
+                    <div class="point">★4.30</div>
+                    <div class="addr">대구 동구 동대구로 101</div>
+                    <div class="time">체크인: 14:00, 체크아웃: 12:00</div>
+                    <div class="tel">☎053-567-8901</div>
+                    <div class="menu">스탠다드룸 - 50,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('gostay-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="gostay-reviews">
+                        <div>리뷰1. 깨끗하고 편안해요</div>
+                        <div>리뷰2. 위치가 좋아요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 스테이댕댕 섹션 -->
+        <div class="restaurant-section" id="staydangdang">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="hotel_icon">
+                숙소 With Pet - 스테이댕댕
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 스테이댕댕</div>
+                    <div class="point">★4.40</div>
+                    <div class="addr">대구 서구 비산로 101</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎053-678-9012</div>
+                    <div class="menu">디럭스룸 - 70,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('staydangdang-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="staydangdang-reviews">
+                        <div>리뷰1. 반려동물 친화적이에요</div>
+                        <div>리뷰2. 다시 오고 싶어요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 팔공힐링펜션 섹션 -->
+        <div class="restaurant-section" id="palgo">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="hotel_icon">
+                숙소 With Pet - 팔공힐링펜션
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 팔공힐링펜션</div>
+                    <div class="point">★4.50</div>
+                    <div class="addr">대구 팔공로 101</div>
+                    <div class="time">체크인: 16:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎053-789-0123</div>
+                    <div class="menu">패밀리룸 - 100,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('palgo-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="palgo-reviews">
+                        <div>리뷰1. 경치가 좋아요</div>
+                        <div>리뷰2. 편안한 숙박이었어요</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://via.placeholder.com/150" alt="sample image 1" class="restaurant-image1">
+                    <img src="https://via.placeholder.com/150" alt="sample image 2" class="restaurant-image2">
+                    <img src="https://via.placeholder.com/150" alt="sample image 3" class="restaurant-image3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>
