@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Incheon</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
+        }
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .image1, .image2, .image3 {
+            width: 170px;
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto;
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">인천광역시</span>
+        <div class="restaurant-item" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('saengsujeong')">1. 문차이나</div>
+            <div class="restaurant-item" onclick="scrollToSection('mansu-chicken')">2. 우미식탁</div>
+            <div class="restaurant-item" onclick="scrollToSection('dogbrothers')">3. 해상궁</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('frankfrank')">1. 윤스커피</div>
+            <div class="restaurant-item" onclick="scrollToSection('years')">2. BON9</div>
+            <div class="restaurant-item" onclick="scrollToSection('cafewoods')">3. 소풍을 파는 가게</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('gostay')">1. 이비스 스타일 앰배서더 인천 에어포트</div>
+            <div class="restaurant-item" onclick="scrollToSection('staydangdang')">2. 일리스테이</div>
+            <div class="restaurant-item" onclick="scrollToSection('palgo')">3. 더위크앤리조트 </div>
+        </div>
+    </div>
+
+    <div class="rectangle3">
+        <!-- 문차이나 섹션 -->
+        <div class="restaurant-section" id="saengsujeong">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 문차이나
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 문차이나</div>
+                    <div class="point">★4.07</div>
+                    <div class="addr">인천 중구 차이나타운로 20</div>
+                    <div class="time">10:00 ~ 21:00</div>
+                    <div class="tel">☎0507-1405-4096</div>
+                    <div class="menu">런치특선(샐러드, 게살스프, 초삼슬, 칠리새우, 탕수육, 식사) - 17,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('saengsujeong-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="saengsujeong-reviews">
+                        <div>리뷰1. 사장님이 반려견들을 진심으로 환영해 주셔서 맘 편히 식사가 가능해요:)</div>
+                        <div>리뷰2. 근본있는 인천 차이나 타운 맛집! 맛있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/rsMtz8VD/1.png" alt="image1" class="image1">
+                    <img src="https://i.postimg.cc/c1Bn28hw/2.png" alt="image2" class="image2">
+                    <img src="https://i.postimg.cc/wM2RmSM0/3.png" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 우미식탁 섹션 -->
+        <div class="restaurant-section" id="mansu-chicken">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 우미식탁
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 우미식탁</div>
+                    <div class="point">★4.42</div>
+                    <div class="addr">인천 연수구 벚꽃로 106 1층 118호</div>
+                    <div class="time">10:30 ~ 21:00</div>
+                    <div class="tel">☎0507-1308-4895</div>
+                    <div class="menu">우미브런치 - 13,000원 크림파스타 - 15,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('mansu-chicken-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="mansu-chicken-reviews">
+                        <div>리뷰1. 넓고 쾌적한 홀과 따뜻한 조명으로 행복감이 느껴지는 식당입니다.</div>
+                        <div>리뷰2. 인테리어도 아기자기하고 예쁜데, 음식까지 맛있으니 재방문의사 100% 예요~!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/FRM1Jhhy/1.png" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/Fz0zywK2/2.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20230824_183%2F1692860158359rldTX_JPEG%2FIMG_8126.jpeg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 해상궁 섹션 -->
+        <div class="restaurant-section" id="dogbrothers">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 해상궁
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 해상궁</div>
+                    <div class="point">★4.58</div>
+                    <div class="addr">인천 중구 마시란로 411</div>
+                    <div class="time">10:00 ~ 21:00</div>
+                    <div class="tel">☎0507-1474-3305</div>
+                    <div class="menu">낙지 한마리 파전 - 23,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('dogbrothers-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="dogbrothers-reviews">
+                        <div>리뷰1. 강아지랑 편하게 힐링하면서 맛있는 음식도 먹고 최고입니다:)</div>
+                        <div>리뷰2. 파전이 보기도 좋고 엄청 맛있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/Hkrx3Jjw/1.png" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/BnRvzq1d/2.png" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240201_103%2F17067717860708BB1W_PNG%2F%25C7%25D1%25BB%25F3%25C2%25F7%25B8%25B2_2%25C2%25F7-7.png" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 윤스커피 섹션 -->
+        <div class="restaurant-section" id="frankfrank">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 윤스커피
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 윤스커피</div>
+                    <div class="point">★4.62</div>
+                    <div class="addr">인천 남동구 구월남로 278 1층</div>
+                    <div class="time">10:00 ~ 22:00(토,일은 ~20:00)</div>
+                    <div class="tel">☎0507-0288-7655</div>
+                    <div class="menu">스노우 킹크랩 샌드위치 - 6,500원</div>
+                    <div class="review review-button" onclick="toggleReviews('frankfrank-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="frankfrank-reviews">
+                        <div>리뷰1. 아기자기하고 강아지들 소품과 포토존까지 있어서 너무 좋아요:)</div>
+                        <div>리뷰2. 강아지 멍푸치노랑 간식도 있어서 짱이에요~</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/nczBbhCz/1.png" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA1MjNfMjky%2FMDAxNzE2NDY5NzA4MTI3.Gyp_W-n7BgM-3gkkwVpiVS0L0K1pR-Hke1stEPzBrLgg.BfRehbHhrjTQO5y8qAwamNJ2z63zwuYUJaUvQ4PZhaQg.JPEG%2F1716462458228.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240215_52%2F1707985778798py4R9_JPEG%2FIMG_9570.jpeg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- BON9 섹션 -->
+        <div class="restaurant-section" id="years">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - BON9
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. BON9</div>
+                    <div class="point">★4.43</div>
+                    <div class="addr">인천 중구 백운로 228번길 100</div>
+                    <div class="time">11:00 ~ 21:00</div>
+                    <div class="tel">☎070-7706-3090</div>
+                    <div class="menu">BON9 라떼 - 7,500원</div>
+                    <div class="review review-button" onclick="toggleReviews('years-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="years-reviews">
+                        <div>리뷰1. 인천 반려견 동반 카페 1등입니다. 너무 좋아요!</div>
+                        <div>리뷰2. 넓은 애견운동장도 있어서 좋고, 메뉴들도 다 맛있어요:)</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMTVfMTM1%2FMDAxNzEwNDgyOTM2ODQ3.w1qUUlDUKlSalkzd0r2kZfwFCcNHM4duHtTUSlgEGpwg.eSTbaVARTXZUGihTwN9aC43SAVTv8lsL9zXrYzipqkQg.JPEG%2F80814D92-5043-464A-B2E7-3BFCCDE0FEA7.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAxMTdfMTY1%2FMDAxNzA1NDY4ODMzODI4.Ddmt4jeWxcqz5nDmdLytdI_aAdSWdftayY6kNtPbxsUg.UDM0kzSft83DA9O7896X1SX2pyp8ZpICpBjZIR-GAKAg.JPEG%2F0788FAEE-4FB2-42D4-8E8D-A65FE1C9EE0A.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA1MTBfNTIg%2FMDAxNzE1MzIyNDQwNDAx.ISjcAvz3rajOEacx3ZINFVbaV3VPa1LhYR19klz0bm4g.weH0eoANTcXY5DHXHDs7WsawOQxih8zdDljhxMWc_vog.JPEG%2F20240504_112324.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+            </div>
+        </div>
+
+        <!-- 소풍을 파는 가게 섹션 -->
+        <div class="restaurant-section" id="cafewoods">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 소풍을 파는 가게
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 소풍을 파는 가게</div>
+                    <div class="point">★4.64</div>
+                    <div class="addr">인천 서구 청라라임로 138번길 11-1</div>
+                    <div class="time">11:00 ~ 19:00</div>
+                    <div class="tel">☎ X (instagram : @flowers_picnic)</div>
+                    <div class="menu">데이지 타르트 - 7,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('cafewoods-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="cafewoods-reviews">
+                        <div>리뷰1. 소품과 장식 하나하나에 정성이 담겨 있습니다. 너무 예뻐요!</div>
+                        <div>리뷰2. 타르트 맛있어요~ 저희 강아지 찍는 사진 하나하나 마다 견생샷 등극!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzEyMjVfMjU3%2FMDAxNzAzNTEyMDIwNjQ2.O5WWb19DH9iA22imJSYNKKb7Y5qEyJL2cZxk15q_QGAg.VMQGeLxJVqWyXK53AC0WTE56ieZtASWNZwKxJiWrkcgg.JPEG%2F0C09269A-A76B-4E28-99F3-4DFE4C1A01F0.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/W1VQ5C9s/2.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20240423_54%2F1713805808048YcuL3_JPEG%2FIMG_1918.jpeg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 이비스 스타일 앰배서더 인천 에어포트 섹션 -->
+        <div class="restaurant-section" id="gostay">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 이비스 스타일 앰배서더 인천 에어포트
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 이비스 스타일 앰배서더 인천 에어포트</div>
+                    <div class="point">★4.52</div>
+                    <div class="addr">인천 중구 제2터미널대로 340</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 12:00</div>
+                    <div class="tel">☎0507-1468-7202</div>
+                    <div class="menu">슈페리어 더블 룸 - 171,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('gostay-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="gostay-reviews">
+                        <div>리뷰1. 인천공항뷰라서 예쁘지만 방음을 걱정했는데 방음 잘 되고 편안해요.</div>
+                        <div>리뷰2. 바우와우 패키지 신청하면 반려동물 용품을 준비해 주셔서 너무 좋았어요:)</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/0QSTWvq2/1.png" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/x8SWBZ0G/2.png" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA2MDJfMTgy%2FMDAxNzE3Mjk5NjMyOTcw.3pTDhFGuh668mo3jSbJSkwBfs9ta-o1k33VQS2WzIbcg.lcHI3le1w7AMpXNffDkwWWk5hpCJPA9Seyw7Jy2qBNog.JPEG%2FBeautyPlus%25A3%25DF20240530144253275%25A3%25DFsave.jpg&type=sc960_832" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 일리스테이 섹션 -->
+        <div class="restaurant-section" id="staydangdang">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 일리스테이
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 일리스테이</div>
+                    <div class="point">★4.68</div>
+                    <div class="addr">인천 강화군 화도면 해안남로 2559-7</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1468-4223</div>
+                    <div class="menu">A타입(개별 수영장, 전기 그릴, 웰컴 푸드) - 380,000원~ (반려견 30,000원)</div>
+                    <div class="review review-button" onclick="toggleReviews('staydangdang-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="staydangdang-reviews">
+                        <div>리뷰1. 히노끼탕 뜨끈하니 너무 좋아요~</div>
+                        <div>리뷰2. 모든 게 너무 마음에 들어요..! 다음에 꼭 또 올거예요:)</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://i.postimg.cc/25k3NH5D/1.png" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/QtVtHH5Y/2.png" alt="image 2" class="image2">
+                    <img src="https://i.postimg.cc/fb8yzx30/3.png" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 더위크앤리조트 섹션 -->
+        <div class="restaurant-section" id="palgo">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 더위크앤리조트
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 더위크앤리조트</div>
+                    <div class="point">★4.21</div>
+                    <div class="addr">인천 중구 용유서로 379</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎032-745-0000</div>
+                    <div class="menu"> 어반 더블(오션뷰) - 170,000원(반려견 22,000원)</div>
+                    <div class="review review-button" onclick="toggleReviews('palgo-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="palgo-reviews">
+                        <div>리뷰1. 조용히 쉬다가기 좋고, 오션뷰라서 예쁘네요~</div>
+                        <div>리뷰2. 펫호텔 서비스 넘 만족이요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA1MDdfMjgw%2FMDAxNzE1MDc3NDM1OTI3.bJ--W7f56niSMyFjvPlzD0QYqntdFFI16DuFT6gQ7q4g.2D1GgZ_ZdUOxXYiZxHsQT839GNPhB9sruPdyCLrT4JIg.JPEG%2Foutput_2567839665.jpg&type=sc960_832" alt="image 1" class="image1">
+                    <img src="https://i.postimg.cc/rmJ1LhxX/1.png" alt="image 2" class="image2">
+                    <img src="https://i.postimg.cc/9FqDd80m/2.png" alt="image 2" class="image3">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const container = document.querySelector('.rectangle3'); // 스크롤을 적용할 컨테이너
+            if (section) {
+                container.scrollTo({
+                    top: section.offsetTop - container.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>
