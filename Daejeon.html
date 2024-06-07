@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Daejeon</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
+        }
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .image1, .image2, .image3 {
+            width: 170px;
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto;
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">대전광역시</span>
+        <div class="restaurant-item" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('kariko')">1. 카리코</div>
+            <div class="restaurant-item" onclick="scrollToSection('mongsang')">2. 몽상도취</div>
+            <div class="restaurant-item" onclick="scrollToSection('sunrise')">3. 선라이즈 키친</div>
+            <div class="restaurant-item" onclick="scrollToSection('traffic')">4. 신호등장작구이</div>
+            <div class="restaurant-item" onclick="scrollToSection('happen')">5. 해프닝</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('dongbang')">1. 동방커피</div>
+            <div class="restaurant-item" onclick="scrollToSection('monu')">2. 모누</div>
+            <div class="restaurant-item" onclick="scrollToSection('wix')">3. 윅스커피</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('imhouse')">1. 아임하우스</div>
+            <div class="restaurant-item" onclick="scrollToSection('scent')">2. 캠프향기</div>
+        </div>
+    </div>
+
+    <div class="rectangle3">
+        <!-- 카리코 섹션 -->
+        <div class="restaurant-section" id="kariko">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 카리코
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 카리코</div>
+                    <div class="point">★4.31</div>
+                    <div class="addr">대전 유성구 엑스포로151번길 19 도룡하우스디 C108호</div>
+                    <div class="time">11:00~20:30</div>
+                    <div class="tel">☎0507-1349-3513</div>
+                    <div class="menu">일본식 스프, 카레 전문점</div>
+                    <div class="review review-button" onclick="toggleReviews('kariko-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="kariko-reviews">
+                        <div>리뷰1. 고기가 엄청 부드러워요.</div>
+                        <div>리뷰2. 데이트 코스로 딱이에요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/jtA2Jg.jpg" alt="image1" class="image1">
+                    <img src="https://ifh.cc/g/wQmJlC.jpg" alt="image2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA0MThfMTcw%2FMDAxNzEzNDEzODA2Njcx.o4pl3ifTOm0We20EqVWvlsXsgDPB7hPtOXDeNoo0WQIg.VVvN4BP10mSPIhY-0lBuCpuTMsTSjYE9H77njpkzM5Qg.JPEG%2F17FCE9EA-6D56-4A3C-B2B5-1AA0AC9302E5.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 몽상도취 섹션 -->
+        <div class="restaurant-section" id="mongsang">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 몽상도취
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 몽상도취</div>
+                    <div class="addr">대전 서구 갈마역로11번길 24 1층 102호</div>
+                    <div class="time">매주 일요일 휴무, 17:00 ~ 24:00</div>
+                    <div class="tel">☎010-6556-7233</div>
+                    <div class="menu">마라새우 - 28,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('mongsang-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="mongsang-reviews">
+                        <div>리뷰1. 꿔바로우가 바삭해요!</div>
+                        <div>리뷰2. 실내만 동반 가능한 건 아쉽네요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/MPVT2v.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/mtw7cM.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/8qvhoS.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 선라이즈 섹션 -->
+        <div class="restaurant-section" id="sunrise">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 선라이즈 키친
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 선라이즈 키친</div>
+                    <div class="addr">대전 서구 신갈마로 225-4 1층</div>
+                    <div class="time">11:30 ~ 21:00</div>
+                    <div class="tel">☎0507-1407-2205</div>
+                    <div class="menu">오리지널 베이컨(small) - 7,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('sunrise-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="sunrise-reviews">
+                        <div>리뷰1. 반려견과 함께 다녀오기 좋아요.</div>
+                        <div>리뷰2. 가격도 저렴한데 가성비까지 괜찮아요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/3G2wnL.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/2THb1F.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDA1MDlfODEg%2FMDAxNzE1MjQxNzA5MDYy.i94Mm8Ll9jZF9UASfIYq-dCRuf44UTI2v3n8iwpobvIg.Us4_M98U6Fvf_BFXSnZBEQaRHOLzlVgZ-Pd8jplD9Zgg.JPEG%2FIMG_0698.JPG" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 신호등장작구이 대전월평점 섹션 -->
+        <div class="restaurant-section" id="traffic">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 신호등장작구이
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">4. 신호등장작구이 대전월평점</div>
+                    <div class="addr">대전 유성구 유성대로828번길 52 1층</div>
+                    <div class="time">11:30~21:00</div>
+                    <div class="tel">☎0507-1445-6580</div>
+                    <div class="menu">닭장작구이 22,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('traffic-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="traffic-reviews">
+                        <div>리뷰1. 직원분들이 친절하세요.</div>
+                        <div>리뷰2. 이렇게 맛있는 반려동물 동반 식당 찾기 쉽지 않은데!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/FKlaLs.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/jTm98F.jpg" alt="image 2" class="image2">
+                </div>
+            </div>
+        </div>
+
+        <!-- 해프닝 섹션 -->
+        <div class="restaurant-section" id="happen">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 해프닝
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">5. 해프닝</div>
+                    <div class="point">★4.69</div>
+                    <div class="addr">대전 유성구 유성대로828번길 52 1층</div>
+                    <div class="time">11:30~21:00</div>
+                    <div class="tel">☎0507-1310-4048</div>
+                    <div class="menu">클래식 라자냐 - 19,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('happen-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="happen-reviews">
+                        <div>리뷰1. 분위기부터 정말 예쁘고 힙해요!</div>
+                        <div>리뷰2. 파스타 뇨끼 맛집이에요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/sxMwbg.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/qKo7aA.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/bKqQlQ.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 동방커피 본점 섹션 -->
+        <div class="restaurant-section" id="dongbang">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 동방커피
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 동방커피 본점</div>
+                    <div class="point">★4.7</div>
+                    <div class="addr">대전 서구 용문로 41-26</div>
+                    <div class="time">12:00 ~ 01:00</div>
+                    <div class="tel">☎0507-1351-0633</div>
+                    <div class="menu">아인슈페너 - 6,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('dongbang-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="dongbang-reviews">
+                        <div>리뷰1. 고즈넉한 분위기의 인테리어예요.</div>
+                        <div>리뷰2. 야외만 동반 가능한 건 아쉬운 점입니다.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/dzWF6T.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/b1bow9.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/CHTOx3.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 모누 섹션 -->
+        <div class="restaurant-section" id="monu">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 모누
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 모누</div>
+                    <div class="addr">대전 유성구 계룡로52번길 11 111호</div>
+                    <div class="time">매주 화요일 휴무, 12:00 ~ 21:00</div>
+                    <div class="menu">카라멜 푸딩 - 4,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('monu-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="monu-reviews">
+                        <div>리뷰1. 귀여운 디저트가 다양해요!</div>
+                        <div>리뷰2. 강아지가 엄청 마음에 들어하네요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA1MTFfMTg4%2FMDAxNzE1NDE1Mzc3MTgx.Gwm0dPGhTAT6T-eXF5Nf-oiwpZzWm-qJc0DeI7PYOSkg.N07BidMS48_h_StUK6WSNJOoT5CPtvIF1vm47UNzy5Qg.JPEG%2F4DCEF62B-F451-4A3B-9546-73250E640BE5.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/gQTxcj.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzAzMDlfMSAg%2FMDAxNjc4MzUxMDM2MTgz.zMq36Mo--APoKq6PLm0crkxN3i9tUAiAcuaIulhYwLwg.PaK0JonpahLnEwoSJDJoeGQnNg53j_5YSLT7Ll89rsog.JPEG%2FB5C6EBC3-4865-4189-910B-02A74E83062F.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 윅스커피 섹션 -->
+        <div class="restaurant-section" id="wix">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 윅스커피
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 윅스커피</div>
+                    <div class="point">★4.85</div>
+                    <div class="addr">대전 유성구 계룡로74번길 42 102호</div>
+                    <div class="time">격주 목요일 휴무, 11:00~22:00</div>
+                    <div class="tel">☎0507-1366-5044</div>
+                    <div class="menu">바나나푸딩 - 6,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('wix-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="wix-reviews">
+                        <div>리뷰1. 조용하고 깔끔한 공간이라 대화하기 좋아요.</div>
+                        <div>리뷰2. 상주견이 작고 귀여워요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/VWQjxf.png" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/FDHnCM.jpg" alt="image 2" class="image2">
+                </div>
+            </div>
+        </div>
+
+        <!-- 아임하우스 섹션 -->
+        <div class="restaurant-section" id="imhouse">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 아임하우스
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 아임하우스</div>
+                    <div class="addr">대전 서구 장안로 570</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1355-9666</div>
+                    <div class="menu">독채, 기준 2인 - 250,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('imhouse-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="imhouse-reviews">
+                        <div>리뷰1. 시설이 깨끗했고 컵, 양념재료, 전자렌지, 식기들도 완벽했어요.</div>
+                        <div>리뷰2. 아기자기한 조명들과 소품들, 인테리어가 너무 따뜻했어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/P169PZ.jpg" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMjdfMjYx%2FMDAxNzExNDcxNjY2Mzgy.cutOQ2GBS6le9zfRntn-DBxmGprmi70do6kzDkuplnwg.xwtM39a-577lpZBKdPKCNTsbwG1SH0ktE18X9aY89CAg.JPEG%2F1711342187581.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMjdfMTQ3%2FMDAxNzExNDcxNjY2NTEw.7SQjPNmmb6cUoS-RsX8K92yuzU9CjK_i0d19zUjws7Mg.ZInGrWu5pFVhZ4RhS5fIXXCYG3NrOy3D_klAmaZhTD4g.JPEG%2F1711342187296.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 캠프향기 섹션 -->
+        <div class="restaurant-section" id="scent">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 캠프향기
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 캠프향기</div>
+                    <div class="point">★4.76</div>
+                    <div class="addr">대전 동구 산내로 710</div>
+                    <div class="time">체크인: 15:00 ~ 20:30, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1418-6830</div>
+                    <div class="menu">반려견 동반 소풍 - 85,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('scent-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="scent-reviews">
+                        <div>리뷰1. 최대 2견까지 동반 가능하고, 대형견도 가능해요! 따로 바베큐 하우스도 구비되어 있어요.</div>
+                        <div>리뷰2. 한적하고 조용하고 쉬기 좋습니다. 사장님 정말 친절하세요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/1qGKbg.jpg" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA1MjJfOTAg%2FMDAxNzE2MzM0NjI0MDQ5.MNdPkOC07MhPmiIcZBLn3-2jjUI8YpV5EdTbDMk5ZDAg.D2h7sPI69gZZJORQKJgEaWADPpyZO-bcfEuDZUeJKnUg.JPEG%2F%25C3%2583%25C2%25AB%25C3%2582%25C2%25A9%25C3%2582%25C2%258D%25C3%2583%25C2%25AC%25C3%2582%25C2%259D%25C3%2582%25C2%25B41.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/wRwOqO.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const container = document.querySelector('.rectangle3'); // 스크롤을 적용할 컨테이너
+            if (section) {
+                container.scrollTo({
+                    top: section.offsetTop - container.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>

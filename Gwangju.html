@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Gwangju</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
+        }
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .image1, .image2, .image3 {
+            width: 170px;
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto;
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">광주광역시</span>
+        <div class="restaurant-item" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('poca')">1. 포카포카</div>
+            <div class="restaurant-item" onclick="scrollToSection('bandal')">2. 반달옥</div>
+            <div class="restaurant-item" onclick="scrollToSection('shiba')">3. 시바카레</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('ddalgo')">1. 딸고라떼</div>
+            <div class="restaurant-item" onclick="scrollToSection('onul')">2. 카페오늘</div>
+            <div class="restaurant-item" onclick="scrollToSection('sunday')">3. 화이트선데이</div>
+            <div class="restaurant-item" onclick="scrollToSection('slowmood')">4. 슬로우무드</div>
+            <div class="restaurant-item" onclick="scrollToSection('mil')">5. 밀탑</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('urban')">1. 어반스테이</div>
+            <div class="restaurant-item" onclick="scrollToSection('stay')">2. 스테이호텔</div>
+        </div>
+    </div>
+
+    <div class="rectangle3">
+        <!-- 포카포카 섹션 -->
+        <div class="restaurant-section" id="poca">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 포카포카
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 포카포카</div>
+                    <div class="addr">광주 동구 동명로25번길 11 1층</div>
+                    <div class="time">설날/추석 당일만 휴무, 11:30 ~ 21:00</div>
+                    <div class="tel">☎0507-1393-3773</div>
+                    <div class="menu">사케동 정식 15,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('poca-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="poca-reviews">
+                        <div>리뷰1. 노르웨이 최상급 신선한 생연어가 들어간 사케동과 색다른 연어맛도 일품인 아부리사케동 드셔보시길 추천드려요:)</div>
+                        <div>리뷰2. 식감 좋은 샐러드부터 곶감말랭이 후식까지 구성이 정말 좋았어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/lcnDXp.jpg" alt="image1" class="image1">
+                    <img src="https://ifh.cc/g/ZO15XS.jpg" alt="image2" class="image2">
+                    <img src="https://ifh.cc/g/bKaG29.jpg" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 반달옥 봉선본점 섹션 -->
+        <div class="restaurant-section" id="bandal">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 반달옥
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 반달옥</div>
+                    <div class="point">★4.69</div>
+                    <div class="addr">광주 남구 봉선2로 39-13 3층</div>
+                    <div class="time">11:30~22:00</div>
+                    <div class="tel">☎010-2062-9933</div>
+                    <div class="menu">데미그라스돈가츠정식 - 13,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('bandal-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="bandal-reviews">
+                        <div>리뷰1. 동반 시 예약 필수예요!</div>
+                        <div>리뷰2. 어렵게 찾아왔는데 메뉴도 특별하고 강아지랑 같이 올 수 있어서 너무 좋아요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/zQGvP1.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/OMlt1q.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/Qzmd8P.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 시바카레 섹션 -->
+        <div class="restaurant-section" id="shiba">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 시바카레
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 시바카레</div>
+                    <div class="addr">광주 동구 장동로 11 2층</div>
+                    <div class="point">★4.44</div>
+                    <div class="time">11:30 ~ 21:00</div>
+                    <div class="tel">☎0507-1413-0824</div>
+                    <div class="menu">새우크림카레 - 9,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('shiba-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="shiba-reviews">
+                        <div>리뷰1. 입구 인테리어부터 시바견으로 꾸며져 있었고 메뉴마다 개성이 뚜렷해서 좋았어요.</div>
+                        <div>리뷰2. 모든 견종 가능하지만 리드줄, 벨트 필수 착용 같은 펫티켓 잊지 마세요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/ntmlzr.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/Kg6bqK.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/rLl9V8.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 딸고라떼 대전월평점 섹션 -->
+        <div class="restaurant-section" id="ddalgo">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 딸고라떼
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 딸고라떼 신창본점</div>
+                    <div class="addr">광주 광산구 장신로 280-16 1층</div>
+                    <div class="time">매달 1, 3번째 화요일 정기휴무, 10:30 ~ 24:00</div>
+                    <div class="tel">☎0507-1391-9133</div>
+                    <div class="menu">고양이발바닥 찹쌀와플(3조각) - 6,800원</div>
+                    <div class="review review-button" onclick="toggleReviews('ddalgo-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="ddalgo-reviews">
+                        <div>리뷰1. 직원분들이 친절하세요.</div>
+                        <div>리뷰2. 이렇게 맛있는 반려동물 동반 식당 찾기 쉽지 않은데!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/RY3Sv9.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/WVCjhf.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/chasL0.jpg" alt="image 2" class="image2">
+                </div>
+            </div>
+        </div>
+
+        <!-- 카페오늘 섹션 -->
+        <div class="restaurant-section" id="onul">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 카페오늘
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 카페오늘</div>
+                    <div class="point">★4.44</div>
+                    <div class="addr">광주 북구 매곡로 36-3 1층</div>
+                    <div class="time">12:00 ~ 22:00</div>
+                    <div class="tel">☎0507-1460-0722</div>
+                    <div class="menu">퐁뤠오쉐이크 - 5,800원</div>
+                    <div class="review review-button" onclick="toggleReviews('happen-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="happen-reviews">
+                        <div>리뷰1. 덩치가 있는 반려견이라 어디 가기 쉽지 않은데 흔쾌히 가능하다고 해주셔서 감사히 다녀왔어요.</div>
+                        <div>맛, 양, 친절함까지 어느 하나 빠지지 않는 카페예요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/V6aSza.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/WNGHsO.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/w1rHlt.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 화이트선데이 섹션 -->
+        <div class="restaurant-section" id="sunday">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 화이트선데이
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 화이트선데이</div>
+                    <div class="point">★4.66</div>
+                    <div class="addr">광주 서구 시청로 92 상무유탑 상가 1층 106호</div>
+                    <div class="time">매주 토, 일 정기휴무, 12:00 ~ 18:00</div>
+                    <div class="menu">아메리카노 - 4,800원</div>
+                    <div class="review review-button" onclick="toggleReviews('sunday-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="sunday-reviews">
+                        <div>리뷰1. 매장 내 애견용품이 다양하게 즐비되어 있어서 좋아요.</div>
+                        <div>리뷰2. 인테리어가 예쁜 곳에서 반려견 생일파티를 즐길 수 있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/6tTFfd.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/XkKf7F.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/ylxAdd.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 슬로우무드 섹션 -->
+        <div class="restaurant-section" id="slowmood">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 슬로우무드
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">4. 슬로우무드</div>
+                    <div class="point">★4.5</div>
+                    <div class="addr">광주 광산구 수완로9번길 39-5 1층</div>
+                    <div class="time">11:00~23:00</div>
+                    <div class="tel">☎0507-1351-8404</div>
+                    <div class="menu">아메리카노 - 4,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('slow-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="slow-reviews">
+                        <div>리뷰1. 디저트 맛집답게 디저트, 음료 종류가 많아요! 디저트가 너무 맛있어보여서 3개나 구매했어요.</div>
+                        <div>리뷰2. 상주견 은콩이도 너무 귀여워요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/Z3AX38.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/Da5lqG.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/ZcWmnd.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 밀탑 섹션 -->
+        <div class="restaurant-section" id="mil">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 밀탑
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">5. 밀탑</div>
+                    <div class="addr">광주 서구 상무자유로 27 홍타워 1층</div>
+                    <div class="time">09:00~22:30</div>
+                    <div class="tel">☎062-381-2242</div>
+                    <div class="menu">커피빙수 - 12,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('mil-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="mil-reviews">
+                        <div>리뷰1. 설*은 너무 달고 양이 많아서 별로인데 여기는 적당해서 좋아요.</div>
+                        <div>리뷰2. 댕댕이들도 맘껏 뛰어놀 수 있는 공간이에요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/2s2K8o.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/B5csXQ.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/kLhjSv.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. 어반스테이호텔 섹션 -->
+        <div class="restaurant-section" id="urban">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 어반스테이호텔
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 어반스테이호텔</div>
+                    <div class="point">★4.38</div>
+                    <div class="addr">광주 광산구 무진대로232번길 7</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1464-1778</div>
+                    <div class="menu">스탠다드 - 50,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('urban-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="urban-reviews">
+                        <div>리뷰1. 보통 숙소는 올린 사진과 다른데 여기 어반스테이는 사진 그대로였어요.</div>
+                        <div>리뷰2. 가성비도 괜찮고, 요청 시 추가 비용을 내고 반려동물 동반도 가능해요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/78P0JV.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/GRtG6L.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/67ysL3.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 스테이호텔 섹션 -->
+        <div class="restaurant-section" id="stay">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 스테이호텔
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 스테이호텔</div>
+                    <div class="point">★4.22</div>
+                    <div class="addr">광주 동구 구성로144번길 5</div>
+                    <div class="tel">☎0507-1308-6301</div>
+                    <div class="menu">디럭스 룸 - 60,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('scent-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="scent-reviews">
+                        <div>리뷰1. 출장으로 방문했는데 조식을 무료로 제공하고 있지만 조식에 진심이라는 생각이 들 정도로 좋았어요.</div>
+                        <div>리뷰2. 기본 옵션 대비 2만원이 추가되는 애견 동반 룸이 있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/vDYp7X.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/QMnkPv.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/dx8mQg.png" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const container = document.querySelector('.rectangle3');
+            if (section && container) {
+                const containerRect = container.getBoundingClientRect();
+                const sectionRect = section.getBoundingClientRect();
+                const offset = sectionRect.top - containerRect.top + container.scrollTop;
+                container.scrollTo({
+                    top: offset,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>
