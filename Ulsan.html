@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Ulsan</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
+        }
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .image1, .image2, .image3 {
+            width: 170px;
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto;
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">울산광역시</span>
+        <div class="restaurant-item" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('plz')">1. 간절바당</div>
+            <div class="restaurant-item" onclick="scrollToSection('paint')">2. 그림마을 국수</div>
+            <div class="restaurant-item" onclick="scrollToSection('camelia')">3. 동백산방</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('crave')">1. 크레이브커피바</div>
+            <div class="restaurant-item" onclick="scrollToSection('iso')">2. 카페이소</div>
+            <div class="restaurant-item" onclick="scrollToSection('iner')">3. 이너리트</div>
+
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('toma')">1. 토마네 애견펜션</div>
+            <div class="restaurant-item" onclick="scrollToSection('merci')">2. 메르시펜션</div>
+            <div class="restaurant-item" onclick="scrollToSection('33')">3. 클럽33풀빌라</div>
+        </div>
+    </div>
+
+    <div class="rectangle3">
+        <!-- 간절바당 섹션 -->
+        <div class="restaurant-section" id="plz">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 간절바당
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 간절바당</div>
+                    <div class="addr">울산 울주군 서생면 신암해안길 11</div>
+                    <div class="time">11:00 ~ 21:00</div>
+                    <div class="tel">☎0507-1376-6163</div>
+                    <div class="menu">떡새우라면 - 8,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('plz-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="plz-reviews">
+                        <div>리뷰1. 사장님이 정말 친절하세요! 예쁘게 나오는 포토존도 알려주시고, 강아지 간식도 챙겨주시는 센스가 최고예요.</div>
+                        <div>리뷰2. 제주도를 모티브로 한 카페라서 제주도에 있는 기분이었어요. 소품도 하나하나 신경쓰신 것 같은 느낌!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://files.ban-life.com/content/2023/07/body_1689163791.jpg" alt="image1" class="image1">
+                    <img src="https://files.ban-life.com/content/2023/07/body_1689163796.jpg" alt="image2" class="image2">
+                    <img src="https://ifh.cc/g/sVmgz3.jpg" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 그림마을 국수 섹션 -->
+        <div class="restaurant-section" id="paint">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 그림마을 국수
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 그림마을 국수</div>
+                    <div class="addr">울산 동구 성끝4길 112 (방어동)</div>
+                    <div class="time">11:00 ~ 18:00</div>
+                    <div class="tel">☎052-236-2303</div>
+                    <div class="menu">부추전 - 10,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('paint-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="paint-reviews">
+                        <div>리뷰1. 가게 안이 넓지 않아서 늘 사람이 많으니 가능한 한 빨리 방문하는 걸 추천해요.</div>
+                        <div>리뷰2. 바닷가 주변에 위치해 있어서 방문 후 슬도 바닷길 산책이 가능해요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://files.ban-life.com/content/2023/07/body_1688958942.jpg" alt="image 1" class="image1">
+                    <img src="https://files.ban-life.com/content/2023/07/body_1688959697.jpg" alt="image 2" class="image2">
+                    <img src="https://files.ban-life.com/content/2023/07/body_1688959850.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 동백산방 섹션 -->
+        <div class="restaurant-section" id="camelia">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 동백산방
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 동백산방</div>
+                    <div class="addr">울산 울주군 온양읍 선양골길 56</div>
+                    <div class="time">11:30 ~ 21:00</div>
+                    <div class="tel">☎052-238-8558</div>
+                    <div class="menu">오리불고기(중) - 35,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('camelia-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="camelia-reviews">
+                        <div>리뷰1. 개별룸이라는 것만으로도 쾌적한데 에어컨까지 있어서 더욱 좋았어요.</div>
+                        <div>리뷰2. 사장님이 개를 키우시는 분이라 함께 꾸려진 정원에서 식사 후 마음껏 뛰놀 수 있었어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/H2nRsD.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/DLNfpp.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/X90m5D.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 크레이브커피바 섹션 -->
+        <div class="restaurant-section" id="crave">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 크레이브커피바
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 크레이브커피바</div>
+                    <div class="addr">울산 남구 신정로40번길 2 1층</div>
+                    <div class="time">12:00 ~ 23:00</div>
+                    <div class="tel">☎010-2285-3184</div>
+                    <div class="menu">시그니처(버터크림) - 6,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('crave-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="crave-reviews">
+                        <div>리뷰1. 갑작스럽게 온 거라 아무것도 챙기지 못했는데 강아지 물그릇도 준비해주셔서 좋았어요.</div>
+                        <div>리뷰2. 아담하고 포근한 분위기에서 수다 나누기 좋은 곳! 야외테라스에서는 강아지들이 놀 수 있는 공간도 마련되어 있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/QDvokp.jpg" alt="image1" class="image1">
+                    <img src="https://ifh.cc/g/qtrkZ4.jpg" alt="image2" class="image2">
+                    <img src="https://ifh.cc/g/LjT874.jpg" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 카페이소 섹션 -->
+        <div class="restaurant-section" id="iso">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 카페이소
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 카페이소</div>
+                    <div class="point">★4.42</div>
+                    <div class="addr">울산 울주군 온산읍 강양길 77-8 강양리 136</div>
+                    <div class="time">11:00 ~ 21:00</div>
+                    <div class="tel">☎0507-1396-0798</div>
+                    <div class="menu">베이컨 스카치에그 - 3,700원</div>
+                    <div class="review review-button" onclick="toggleReviews('iso-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="iso-reviews">
+                        <div>리뷰1. 브런치 먹으러 다녀왔는데 음식들이 정성스럽고 너무 맛있어요.</div>
+                        <div>리뷰2. 마당도 넓고 뷰가 좋아서 날씨 좋을 땐 강아지들과 함께 놀면 힐링될 것 같아요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20220718_182%2F1658126289603LdhYb_JPEG%2FB5DA47E1-E9BD-4D8B-8979-162A9D81FCCC.jpeg" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20190219_87%2F1550571691093cLNYw_JPEG%2FQNQAAJuf07pC3h8KpHAosI8F.PNG.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAzMjNfMTkg%2FMDAxNzExMTcyNTIxODc0.F2-JqTVvpRsuEyZnGMiOBQ6ClLmvh0lMsEzXt1ltmkMg.TXwMf9d97hgDuQSUiMF6UImlD3YsvEgoW2I1xrk3v3wg.JPEG%2F20240323_144131.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!--이너리트 섹션 -->
+        <div class="restaurant-section" id="iner">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 이너리트
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 이너리트</div>
+                    <div class="point">★4.63</div>
+                    <div class="addr">울산 울주군 삼남읍 수남벚꽃길 9 1층</div>
+                    <div class="time">08:00 ~ 21:30</div>
+                    <div class="menu">아메리카노 - 5,500원</div>
+                    <div class="review review-button" onclick="toggleReviews('iner-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="iner-reviews">
+                        <div>리뷰1. 메뉴들이 엄청 많은데도 전부 보통 이상이었어요! 봄에 가면 벚꽃구경도 가능해요.</div>
+                        <div>리뷰2. 곳곳에 포토존이 즐비해 있어서 강아지와 사진 찍기 좋은 곳이에요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/6WbDLy.jpg" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20231004_103%2F1696401733500rjE9n_JPEG%2F26922-10387-14514.JPG" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA1MjFfOTAg%2FMDAxNzE2MjU1MTE2MDkx.eJ8PjuhQZ2yVPjsASi1lJh7dHTzYInAPDFYV6dotjJIg.0crnq_baOdFexl6sTKJfXpw6KyS6oPSf63hQZE2E6-Eg.JPEG%2F143F6584-7337-48BB-8360-B103E2963CF2.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 토마네 애견펜션 섹션 -->
+        <div class="restaurant-section" id="toma">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 토마네 애견펜션
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 토마네 애견펜션</div>
+                    <div class="addr">울산 울주군 서생면 해맞이로 1271-36</div>
+                    <div class="time">체크인: 14:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1466-5055</div>
+                    <div class="menu">독채, 기준 4인 - 360,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('toma-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="toma-reviews">
+                        <div>리뷰1. 없는 거 빼고 다 있어요! 딱 한 팀만 사용하는 유형이라 타인 신경쓸 필요 없이 겁많고 예민한 강아지도 자유로운 점이 좋았어요.</div>
+                        <div>리뷰2. 천연잔디 마당, 노천탕, 반려견 수영장, 펫 전용 목욕실, 노래방 기계에 보드게임까지 다 있는데 이 가격이면 매우 착한 가격이라는 생각이 들었어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA2MDVfMjQ3%2FMDAxNzE3NTg0NDY5NDkw.u54pU3wEhBWQtFxna-DoSYLoSR8yp6pgvTsflAFGtRkg.TIXD96ad0I8PAK535EVZsVWmoUnpkcR5AYOHqUiETY0g.JPEG%2F1717457203774.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA2MDVfMjMz%2FMDAxNzE3NTg0NDY5OTg0.zAHHWE5tOy3OdhRtV8I_MrBq1FDlKkCLezVoy0p1aDQg.YXIUuxjT4QwHEdhBAzjej9bZ0BBbfBGS17GVisOeQQYg.JPEG%2F1717457203015.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA2MDVfNjIg%2FMDAxNzE3NTg0NDcwNzE5.8G3ZBgJBYGtU4yFuc-Wu2IgZ9NPKqWf5P6GLCfoDVTkg.VcuMdqbql8OXi2vIyxSLkoNi2TOh63L54fKiiXnnZYwg.JPEG%2FIMG_20240603_061612_431.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 메르시펜션 섹션 -->
+        <div class="restaurant-section" id="merci">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 메르시펜션
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 메르시펜션</div>
+                    <div class="addr">울산 울주군 상북면 삽재로 39</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1391-1255</div>
+                    <div class="menu">2인 2견(10kg 미만) 기준 복층- 179,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('merci-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="merci-reviews">
+                        <div>리뷰1. 개아들이 소리에 예민하고 불안한 환경에 밥도 안 먹는데 시설이 너무 쾌적하고 방음이 좋아서 탈없이 지낼 수 있었어요.</div>
+                        <div>리뷰2. 소소하지만 세심하고 센스있는 편의가 잘 되어 있고, 사장님도 정말 친절하세요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAxMTJfODgg%2FMDAxNzA1MDUwMzc1ODM3.uIPqeuG-uZa7FhsS-k2mFy3zYlNcxhf4wxYKRMtEs6sg.ooKHT4Al7bjidUrIH82KcfSAMTfpZ2YCDkXXW-gPGt4g.JPEG%2FBA64E272-9BAE-4DCF-B7C2-F99817BB50AF.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA2MjFfMjQ2%2FMDAxNjg3MzE2NzgwMTYy.T3R5TZQOTWBhD-K5dB0fPh8GN2uRfNxSF-d1J-gD2OIg.t0l-7TzSOtNeYiO_L1imKwVjaPX9SzzVE5FpVkPBmJwg.JPEG%2F20230619_155128.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA2MjFfOTEg%2FMDAxNjg3MzE2MDkxMzk5.qbVjKic1sNdQs8pRbf4yH38C3ciCVbbKjntbHzWtJL8g.AaHXv3BloQ31tzse0BgFw_t8-s-CQlbXwDvfxrjFGkAg.JPEG%2F20230619_153142.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 클럽33풀빌라 섹션 -->
+        <div class="restaurant-section" id="33">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 클럽33풀빌라
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 클럽33풀빌라</div>
+                    <div class="addr">울산 울주군 상북면 삽재로 279-15</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1390-8335</div>
+                    <div class="menu">CLUB 01(반려동물 추가요금 포함) - 118,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('33-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="33-reviews">
+                        <div>리뷰1. 어린 댕이를 데리고 가서 걱정 많이 했는데 수영장 물도 따뜻하게 준비해주시고 객실도 깨끗해서 넘 좋았어요.</div>
+                        <div>리뷰2. 조용하고 힐링하기 좋아요! 넓은 잔디 위로 펼쳐진 마운틴뷰가 인상적이에요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMzA4MjVfMTc3%2FMDAxNjkyOTY4MDczNTM4.tEe9ra-W08cBDpcM0aYX0hf4Dv_TT-dOd-ZpM6Ctujkg.cE6iKaHdqEIwcC79L_iOQG3N8C2uost1VyQpoqm-J1Ug.JPEG%2F1692707483424.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/qwp4vY.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/GnwfZS.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const container = document.querySelector('.rectangle3'); // 스크롤을 적용할 컨테이너
+            if (section) {
+                container.scrollTo({
+                    top: section.offsetTop - container.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>

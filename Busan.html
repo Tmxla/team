@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="kor">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>With Pet-Busan</title>
+    <link rel="icon" type="image/jpeg" href="https://www.dropbox.com/scl/fi/ndps1k2bul928mm9lep9v/.jpeg?rlkey=34w8mlg74v9xu1x2odk16ux7t&st=w49v79y9&dl=1">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: 110vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            position: relative;
+            cursor: url('https://www.dropbox.com/scl/fi/gtzfmv2g3f5vsv43yxf8e/dog2.cur?rlkey=p2661ufl9q0h1vvto4ew0c4zo&st=4j9dqyp3&dl=1'), auto;
+        }
+
+        .rectangle1, .rectangle2, .rectangle3 {
+            text-align: left;
+            padding: 10px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .rectangle1 {
+            width: 1100px;
+            height: 100px;
+            background-color: white;
+            position: absolute;
+            top: 3%;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            width: 80px;
+            height: 80px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .with-pet {
+            font-size: 32px;
+            font-weight: 900;
+            margin-left: 20px;
+        }
+
+        .back-button {
+            width: 40px;
+            height: 40px;
+            background-color: #e0e0e0;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            margin-right: 20px;
+        }
+
+        .rectangle2 {
+            width: 233px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 550px);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .rectangle2 span {
+            display: block;
+            margin: 0;
+        }
+
+        .restaurant-item {
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .rectangle3 {
+            width: 850px;
+            height: 600px;
+            background-color: white;
+            position: absolute;
+            top: calc(10% + 30px + 20px);
+            left: calc(50% - 300px);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-y: auto;
+        }
+
+        .info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e0e0e0;
+            border: 1px solid #9EBC7C;
+        }
+
+        .restaurant-section {
+            margin-bottom: 50px;
+        }
+
+        .restaurant-section h2 {
+            margin: 0 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon {
+            width: 45px;
+            height: auto;
+            margin-right: 10px;
+        }
+
+        .image1, .image2, .image3 {
+            width: 170px;
+            height: 170px;
+            margin-right: 10px;
+        }
+
+        .information {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .information-text {
+            flex: 1;
+            padding-right: 10px;
+        }
+
+        .information-images {
+            display: flex;
+            flex-shrink: 0;
+        }
+
+        .name, .point, .addr, .time, .tel, .menu, .review {
+            margin: 5px 0;
+        }
+
+        .review {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            border: 1px solid #000000;
+            border-radius: 5px;
+            background-color: white;
+            cursor: pointer;
+            box-sizing: border-box;
+            width: auto;
+        }
+
+        .review-container {
+            display: none;
+            background-color: #e0e0e0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #000000;
+            position: relative;
+            width: 90%;
+        }
+    </style>
+</head>
+<body>
+    <div class="rectangle1">
+        <div class="logo">
+            <img src="https://i.ibb.co/KVTVyMk/image.jpg" alt="logo">
+            <span class="with-pet">With Pet</span>
+        </div>
+        <button class="back-button" onclick="goBack()">←</button>
+    </div>
+
+    <div class="rectangle2" id="rectangle2">
+        <span class="city-name">부산광역시</span>
+        <div class="restaurant-item" onclick="toggleCategory('restaurant')">▼식당</div>
+        <div id="restaurant-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('dohwi')">1. 도희네 조개구이</div>
+            <div class="restaurant-item" onclick="scrollToSection('port')">2. 송정 포트</div>
+            <div class="restaurant-item" onclick="scrollToSection('rock')">3. 고스락</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('cafe')">▼카페</div>
+        <div id="cafe-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('holic')">1. 송정 카페홀릭</div>
+            <div class="restaurant-item" onclick="scrollToSection('isa')">2. 이자벨</div>
+            <div class="restaurant-item" onclick="scrollToSection('britani')">3. 브리타니</div>
+        </div>
+        <div class="restaurant-item" onclick="toggleCategory('hotel')">▼숙소</div>
+        <div id="hotel-list" style="display: none;">
+            <div class="restaurant-item" onclick="scrollToSection('yeongmu')">1. 영무파라드호텔</div>
+            <div class="restaurant-item" onclick="scrollToSection('ocean')">2. 오션 더 포인트 호텔</div>
+            <div class="restaurant-item" onclick="scrollToSection('arban')">3. 아르반 호텔 부산</div>
+        </div>
+    </div>
+
+    <div class="rectangle3">
+        <!-- 도희네 조개구이 섹션 -->
+        <div class="restaurant-section" id="dohwi">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 도희네 조개구이
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 도희네 조개구이</div>
+                    <div class="point">★4.22</div>
+                    <div class="addr">부산 해운대구 청사포로 157</div>
+                    <div class="time">10:00 ~ 05:00</div>
+                    <div class="tel">☎051-704-0113</div>
+                    <div class="menu">모듬조개구이 - 40,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('dohwi-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="dohwi-reviews">
+                        <div>리뷰1. 강아지와 시원한 분위기에서 조개구이를 먹을 수 있어서 좋았어요.</div>
+                        <div>리뷰2. 옆에서 구워주셔서 조개구이 안 태우고 먹을 수 있었어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/wC6gMo.jpg" alt="image1" class="image1">
+                    <img src="https://ifh.cc/g/q0NzgA.jpg" alt="image2" class="image2">
+                    <img src="https://ifh.cc/g/n4wCmQ.jpg" alt="image3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 송정 포트 섹션 -->
+        <div class="restaurant-section" id="port">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 송정 포트
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 송정 포트</div>
+                    <div class="addr">부산 해운대구 송정구덕포길 170-5</div>
+                    <div class="time">12:00~23:00</div>
+                    <div class="tel">☎0507-1355-1902</div>
+                    <div class="menu">제주 패밀리 세트(1kg) - 100,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('bandal-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="bandal-reviews">
+                        <div>리뷰1. 시원한 야외에서 반려동물과 식사할 수 있는 곳을 찾는다면 송정 포트가 제격이에요.</div>
+                        <div>리뷰2. 강아지도 잘 뛰어놀고 맛도 최고입니다. 분위기 미쳤어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/sjmY9s.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/kz56b5.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA2MDdfMzEg%2FMDAxNzE3NzUwMDY5MDA5.uBzyrvSZu_VoDfrox1KdB8ibQc9y5i2rx3AdcyKq260g.FzirWi_VhwmewWiP_sMYxm1FTgK5C_qtQ6fjDD_BdYMg.JPEG%2F4FE8E45C-AB5B-41C1-8434-B8136D8830DD.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 고스락 섹션 -->
+        <div class="restaurant-section" id="rock">
+            <h2>
+                <img src="https://i.postimg.cc/WzSWdQR5/image.png" alt="restaurant_icon" class="icon">
+                식당 With Pet - 고스락
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 고스락</div>
+                    <div class="addr">부산 기장군 장안읍 해맞이로 286</div>
+                    <div class="time">11:30 ~ 20:00</div>
+                    <div class="tel">☎0507-1413-0824</div>
+                    <div class="menu">솥밥, 한우곰탕 - 19,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('rock-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="rock-reviews">
+                        <div>리뷰1. 개인룸이라서 강아지도 자유롭게 둘 수 있었고 바로 앞이 바다라서 뷰가 엄청 예뻤어요.</div>
+                        <div>리뷰2. 메뉴도 맛있고 종종 가족끼리 외식하기 좋은 장소같아요!</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/BmO4Xp.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/4YtlpA.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/PJKpBo.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 송정 카페홀릭 섹션 -->
+        <div class="restaurant-section" id="holic">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 송정 카페홀릭
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 송정 카페홀릭</div>
+                    <div class="addr">부산 해운대구 송정해변로 50 2층</div>
+                    <div class="time">11:00 ~ 22:00</div>
+                    <div class="tel">☎0507-1312-4851</div>
+                    <div class="menu">브라운 치즈 크로플 - 9,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('holic-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="holic-reviews">
+                        <div>리뷰1. 예쁘고 탁 트인 바다를 보며 강아지와 함께 시간을 보낼 수 있어서 커피와 디저트가 더 맛있게 느껴졌어요.</div>
+                        <div>리뷰2. 1층에서 서핑강습도 같이 하고 있어 인파가 많기에 여름엔 정신없는 분위기예요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/sYy0wr.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/jhlzy8.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/Zcvn6X.jpg" alt="image 2" class="image2">
+                </div>
+            </div>
+        </div>
+
+        <!-- 이자벨 섹션 -->
+        <div class="restaurant-section" id="isa">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 이자벨
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 이자벨</div>
+                    <div class="addr">부산 강서구 공항앞길51번길 28</div>
+                    <div class="time">10:30 ~ 18:00</div>
+                    <div class="tel">☎0507-1381-5856</div>
+                    <div class="menu">이자벨커피 - 6,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('isa-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="isa-reviews">
+                        <div>리뷰1. 반려견 실내동반 시 가방/케이지/방석 필요합니다! 브런치가 신박해서 사진 찍기 좋아요.</div>
+                        <div>사장님 혼자서 운영 중이신데 손님은 엄청 많아서 웨이팅해야 할 수 있어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/JnFTnw.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/jHaBBy.jpg" alt="image 2" class="image2">
+                    <img src="https://ifh.cc/g/1Rb4Do.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 브리타니 섹션 -->
+        <div class="restaurant-section" id="britani">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/0lhcef4qmqpt4fc59hmgy/cafe.png?rlkey=nowbk4qvahzcwyg1umeh1oe1f&st=b7z0ft4q&dl=1" alt="cafe_icon" class="icon">
+                카페 With Pet - 브리타니
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 브리타니</div>
+                    <div class="addr">부산 강서구 가덕해안로 663</div>
+                    <div class="point">★4.4</div>
+                    <div class="time">11:30 ~ 20:00</div>
+                    <div class="tel">☎0507-1413-0824</div>
+                    <div class="menu">누텔라 바나나 베녜 - 8,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('britani-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="britani-reviews">
+                        <div>리뷰1. 반려동물 동반 시 야외석에 앉아야 하지만 오션뷰가 절경이라 추천하게 되는 것 같아요.</div>
+                        <div>리뷰2. 라떼가 정말 맛있어요! 라떼 먹고플 때, 가덕도 바다 보고싶을 땐 무조건 여기로 옵니다.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/KY9kxw.jpg" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fldb-phinf.pstatic.net%2F20210821_183%2F1629528181603vQSoN_JPEG%2FAJNlT9P850jwUuduNr_HhyTY.jpeg.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA1MTRfMjIx%2FMDAxNzE1Njc0MzUxMzgz.AbS8e628Db10WIgglru0gxXg5t1Za0kA5fmCWmzpLwsg.Ll7-6WyFB41xhTOPeSDpu0VNJn0nvNdcE9Byq1eOfDsg.JPEG%2F90EC0C05-3411-4219-B205-316A2B92ED95.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 1. 영무파라드호텔 섹션 -->
+        <div class="restaurant-section" id="yeongmu">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 영무파라드호텔
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">1. 영무파라드호텔</div>
+                    <div class="point">★4.26</div>
+                    <div class="addr">부산 해운대구 해운대해변로298번길 25</div>
+                    <div class="time">체크인: 15:00, 체크아웃: 11:00</div>
+                    <div class="tel">☎0507-1445-0124</div>
+                    <div class="menu">디럭스 더블 - 130,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('yeongmu-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="yeongmu-reviews">
+                        <div>리뷰1. 애견동반 펜션보다 훨씬 좋고 해운데 도보 5분 거리 대만족이었습니다.</div>
+                        <div>리뷰2. 침구도 깨끗하고 바닥도 마루라 좋았습니다. 가성비가 정말 좋은 숙소예요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDA0MDFfMTAx%2FMDAxNzExOTQzMzI0Mzgy.003UcMqQdj3_fW8_9S4JqUT5ZOdLY_gDS1lyAuA4B_Ig.mm8dsNsccMhOO4qSqSOj3ZhpScrB7eBn6GHesoOcwn0g.JPEG%2F20240228_183751.jpg.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAxMjJfMjg1%2FMDAxNzA1ODkxMzg2MjA4.TaBsXqa3gYoUGJ4CVss_xeUPc0vLZZYNGCuRRLhhko4g.R0leTPytU2TI_I1S3QMY6jxrhy9FoTfK63qBiPVWlRsg.JPEG.73yaongi%2FPPS-%25B3%25EE%25C0%25CC%25B9%25E6.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyNDAxMjFfMTk2%2FMDAxNzA1ODIwMzUzNDgy.7TUO1HFKAhZZQrmkfYvm9v7xg0EmtVEuvPUqroYr-Dcg.bB3EBeG-GADifXxJldlK0c_uX2nG3R9FG8NEZ01Pkgkg.JPEG%2F74CC98F2-6A68-4F42-93A8-9FCF89097028.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 오션 더 포인트 호텔 섹션 -->
+        <div class="restaurant-section" id="ocean">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 오션 더 포인트 호텔
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">2. 오션 더 포인트 호텔</div>
+                    <div class="point">★4.4</div>
+                    <div class="addr">부산 수영구 광안해변로278번길 42 오션브릿지 A동 7F~10F</div>
+                    <div class="tel">☎0507-1304-8601</div>
+                    <div class="menu">펫시티 PC - 120,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('ocean-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="ocean-reviews">
+                        <div>리뷰1. 부산 오션뷰 호텔 찾다 방문했는데 광안리 해수욕장이 1분 거리에 있고 주변에 맛집도 많아서 여행하기 좋았어요.</div>
+                        <div>리뷰2. 좋은 뷰를 가진 객실에서 반려동물과 행복한 시간을 보낼 수 있었어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjEwMTZfNDUg%2FMDAxNjY1OTAwNjk2MTMx.unpU7vrlggusOUDI_9IA-vuZgNL35dHUXNdf7pMiYngg.pgr7LLcwVTqoVpkRKPkZB6KFOfjSkDlGCiwY-xL-4nIg.JPEG%2F1665900679236.jpg%3Ftype%3Dw1500_60_sharpen" alt="image 1" class="image1">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjA4MTlfMjYz%2FMDAxNjYwODc2ODQ1ODE4.3hTIbWtAHy1lSoeFSeORFHM0YVMP-OSf205tvg1R4rcg.eG5SoRDj1_r-pmKHVBbeceag6XXDVJgZn9VzbWRSysog.JPEG%2Fupload_d63e6eafc23d9543a7410261e74db196.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=https%3A%2F%2Fpup-review-phinf.pstatic.net%2FMjAyMjA4MDlfMjE2%2FMDAxNjYwMDA5NjU5NTY5.wcgEjxaiBeEoam5gsB1S6htIgvSagxRVBy-FBCzFbKsg.iUQTQ306dTNWlo7BIQ-QPiApmWq3RZQ4ImUwHuDdzW8g.JPEG%2Fupload_ae75282cb65a32ea2f2b59176a3cad16.jpeg%3Ftype%3Dw1500_60_sharpen" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+        <!-- 아르반 호텔 섹션 -->
+        <div class="restaurant-section" id="arban">
+            <h2>
+                <img src="https://www.dropbox.com/scl/fi/hsq4ffv4je1xs50nkkfqw/hotel.png?rlkey=dxpxeals10v3zjd8824oy4crk&st=9s627oyk&dl=1" alt="hotel_icon" class="icon">
+                숙소 With Pet - 아르반 호텔 부산
+            </h2>
+            <div class="information">
+                <div class="information-text">
+                    <div class="name">3. 아르반 호텔 부산</div>
+                    <div class="point">★4.29</div>
+                    <div class="addr">부산 부산진구 중앙대로691번길 32 13층</div>
+                    <div class="tel">☎051-805-9901</div>
+                    <div class="menu">디럭스 더블룸 - 140,000원</div>
+                    <div class="review review-button" onclick="toggleReviews('arban-reviews')">사람들이 남긴 리뷰들</div>
+                    <div class="review-container" id="arban-reviews">
+                        <div>리뷰1. 위치는 서면역 근처다 보니 접근성이 굉장히 좋았어요. 하지만 조식을 아침 8시쯤에 갔음에도 불구하고 음식이 남아있는게 거의없어서 만족스럽게 먹질 못했어요.</div>
+                        <div>리뷰2. 세면대, 흰 침구류 위에 머리카락을 발견했지만 위치나 반려동물 동반을 생각하면 좋은 선택이라고 생각합니다! 직원분들이 강아지를 예뻐해주셔서 좋았어요.</div>
+                    </div>
+                </div>
+                <div class="information-images">
+                    <img src="https://ifh.cc/g/bwQqQO.jpg" alt="image 1" class="image1">
+                    <img src="https://ifh.cc/g/1zBHxs.jpg" alt="image 2" class="image2">
+                    <img src="https://search.pstatic.net/common/?autoRotate=true&quality=95&type=w750&src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyNDAxMjRfMTU5%2FMDAxNzA2MDYyMjY0NzM0.u996iv7kfuI_NNjd3U4gdlsUNpu3IXXEdrb5Yp4-aLYg.ygVfecY9q28p7z-hRV0VUuyVaheSs5D0ltYMPRKJDdog.JPEG.ll11302%2FKakaoTalk_20240124_110554402_09.jpg" alt="image 3" class="image3">
+                </div>
+            </div>
+        </div>
+
+    <script>
+        function toggleCategory(category) {
+            const list = document.getElementById(`${category}-list`);
+            if (list.style.display === 'none' || list.style.display === '') {
+                list.style.display = 'block';
+            } else {
+                list.style.display = 'none';
+            }
+        }
+
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const container = document.querySelector('.rectangle3'); // 스크롤을 적용할 컨테이너
+            if (section) {
+                container.scrollTo({
+                    top: section.offsetTop - container.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function toggleReviews(section) {
+            const reviewContainer = document.getElementById(section);
+            if (reviewContainer.style.display === 'none' || reviewContainer.style.display === '') {
+                reviewContainer.style.display = 'block';
+            } else {
+                reviewContainer.style.display = 'none';
+            }
+        }
+
+        function goBack() {
+            window.history.back(); // 이전 페이지로 이동
+        }
+    </script>
+</body>
+</html>
